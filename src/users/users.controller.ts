@@ -38,7 +38,6 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
     @Request() req: any,
   ) {
-    // Users can only update their own profile
     if (id !== req.user.sub) {
       throw new Error('Unauthorized');
     }
@@ -47,7 +46,6 @@ export class UsersController {
 
   @Delete(':id')
   async remove(@Param('id') id: string, @Request() req: any) {
-    // Users can only delete their own account
     if (id !== req.user.sub) {
       throw new Error('Unauthorized');
     }

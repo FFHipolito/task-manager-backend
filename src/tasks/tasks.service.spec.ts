@@ -49,7 +49,7 @@ describe('TasksService', () => {
         },
       ];
 
-      jest.spyOn(prismaService.task, 'findMany').mockResolvedValue(tasks);
+      jest.spyOn(prismaService.task, 'findMany').mockResolvedValue(tasks as any);
 
       const result = await service.findAll(userId);
 

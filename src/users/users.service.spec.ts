@@ -38,6 +38,7 @@ describe('UsersService', () => {
         id: '1',
         email: 'test@example.com',
         name: 'Test User',
+        password: 'hashedPassword123',
         createdAt: new Date(),
         updatedAt: new Date(),
       };

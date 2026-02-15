@@ -23,7 +23,7 @@ enum Priority {
 export class CreateTaskDto {
   @IsNotEmpty()
   @IsString()
-  title: string;
+  title!: string;
 
   @IsOptional()
   @IsString()

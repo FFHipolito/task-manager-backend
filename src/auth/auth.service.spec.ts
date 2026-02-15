@@ -23,12 +23,15 @@ describe('AuthService', () => {
         },
         {
           provide: UsersService,
-          useValue: {},
+          useValue: {
+            create: jest.fn(),
+            findOne: jest.fn(),
+          },
         },
         {
           provide: JwtService,
           useValue: {
-            sign: jest.fn(),
+            sign: jest.fn().mockReturnValue('mock_token'),
           },
         },
       ],
@@ -55,10 +58,12 @@ describe('AuthService', () => {
         email: 'test@example.com',
         name: 'Test User',
         password: 'hashed_password',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
-      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(null);
-      jest.spyOn(prismaService.user, 'create').mockResolvedValue(user);
+      (prismaService.user.findUnique as jest.Mock).mockResolvedValue(null);
+      (prismaService.user.create as jest.Mock).mockResolvedValue(user);
 
       const result = await service.register(registerDto);
 
